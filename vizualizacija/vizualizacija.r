@@ -2,6 +2,7 @@
 
 require(ggplot2)
 require(dplyr)
+library(stringr)
 
 #ANALIZA PLAČE GLEDE NA GOSPODARSKO DEJAVNOST OZIROMA PANOGO
 #Kmetijstvo in lov, gozdrastvo, ribištvo
@@ -616,7 +617,8 @@ gd_sprememba <- rbind(gd_moski, gd_zenske)
 gd.crke <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
              "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S")
 gd_sprememba1 <- data.frame(gd.crke, gd_sprememba$gospodarska.dejavnost, gd_sprememba$spol, gd_sprememba$sprememba)
-graf1 <- ggplot(gd_sprememba1 ,aes(x=gd.crke, y=gd_sprememba.sprememba, fill=factor(gd_sprememba.spol))) + 
+
+graf1 <- ggplot(gd_sprememba1 ,aes(x=str_wrap(gd_sprememba.gospodarska.dejavnost,45), y=gd_sprememba.sprememba, fill=factor(gd_sprememba.spol))) + 
   geom_col(position="dodge")  + 
   coord_flip() +
   guides(fill=guide_legend("Spol")) +
@@ -769,15 +771,3 @@ placa_javnisektor_zenske <- max_min %>%
   filter(sektor=="11 Javni sektor - SKUPAJ", spol== "Ženske")
 placa_zasebnisektor_zenske <- max_min %>%
   filter(sektor=="12 Zasebni sektor - SKUPAJ", spol== "Ženske")
-
-#Primerjava minimalne in maksimalne place glede na izobrazbo v letu 2018
-max_min_2018 <- max_min %>%
-  filter(leto == "2018")
-
-ggplot(max_min ,aes(x=placa, y=izobrazba, fill=factor(izobrazba))) + 
-  geom_col(position="dodge")  + 
-  coord_flip() +
-  guides(fill=guide_legend("Izobrazba")) +
-  xlab("Višina plače(€)") + 
-  ylab("Izobrazba")+
-  ggtitle("Primerjava plače(minimalna, maksimalna) glede na izobrazbo")
