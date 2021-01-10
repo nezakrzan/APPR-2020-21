@@ -4,8 +4,6 @@ library(gsubfn)
 library(tidyr)
 library(tmap)
 library(shiny)
-library(reshape)
-library(reshape2)
 
 options(gsubfn.engine="R")
 
