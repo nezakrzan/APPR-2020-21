@@ -75,19 +75,7 @@ urada. Podatki so v petih rapredelnicah v obliki *tidy data*.
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-Najprej sem analizirala višino povprečne bruto mesečne plače v posameznih dejavnostih glede na spol. Podatke sem prikazala grafično za vsako dejavnost posebaj glede na spol in izobrazbo. Jasno je, da imajo ženske in moški z visokošolsko/višješolsko izobrazbo najvišjo plačo v vseh gospodarskih dejavnostih. Prav tako imajo moški v primerjavi z ženskami višjo plačo pri vseh stopnjah izobrazbe(osnovnošolska ali manj, srednješolska, višješolska/visokošolska).
-
-Prvi graf prikazuje spremembo(v odstotokih) plače glede na gospodarsko dejavnost in spol od leta 2010 do 2018.
-
-```{r graf1, echo=FALSE, message=FALSE, warning=FALSE}
-print(graf1)
-```
-
-V nadaljevanju sem pogledala tudi maksimalne in minimalne dosežene plače glede na gospodarsko dejavnost. 
-Maksimalna plača pri moških znaša 3674€ v gospodarski panogi Zdravstvo in socialno varstvo, dosežena pa je z visokošolsko/višješolsko izobrazbo. Pri ženskah le-ta znaša 2771€ v panogi Oskrba z električno energijo, plinom, paro in je prav tako dosežena z visokošolsko(višješolsko izobrazbo. 
-Minimalna plača pri moških znaša 873€ v panogi Gostinjstvo, pri ženskah pa 722€ v panogi Druge raznovrstne poslovne dejavnosti. Pri obeh gre za osnovnošolsko izobrazbo ali manj.
-
-Analizirala sem tudi višino povprečne bruto mesečne plače po statističnih regijah Slovenije, in rezultate prikazala v zemljevidu Slovenije. Očitno je, da so najvišje plače v Osrednjeslovenski regiji, kar je pričakovati. Najnižje plače pa so v Pomurski regiji. 
+Najprej sem analizirala višino povprečne bruto mesečne plače po statističnih regijah Slovenije, in rezultate prikazala v zemljevidu Slovenije. Očitno je, da so najvišje plače v Osrednjeslovenski regiji, kar je pričakovati. Najnižje plače pa so v Pomurski regiji. 
 
 ```{r map, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 print(map)
@@ -110,14 +98,41 @@ Plača se je pri višješolski/visokošolski pri obeh sektorjih od leta 2010 v p
 
 V letu 2018 je najnižja plača bila pri ženskah z osnovnošolsko izobrazbo ali manj v javnem sektorju. Od najnižje plače v zasebnem sektorju se je razlikovala za 36€. Najvišja plača je bila prav tako dosežena v javnem sektorju z višješolsko/visokošolsko izobrazbo in se od najvišje plače v zasebnem sektorju razlikuje za 121€, kar je precej večja razlika kot pri najnižji plači.
 
+Maksimalna plača pri moških znaša 3674€ v gospodarski panogi Zdravstvo in socialno varstvo, dosežena pa je z visokošolsko/višješolsko izobrazbo. Pri ženskah le-ta znaša 2771€ v panogi Oskrba z električno energijo, plinom, paro in je prav tako dosežena z visokošolsko(višješolsko izobrazbo. 
+Minimalna plača pri moških znaša 873€ v panogi Gostinjstvo, pri ženskah pa 722€ v panogi Druge raznovrstne poslovne dejavnosti. Pri obeh gre za osnovnošolsko izobrazbo ali manj.
+
+Plače se glede na gospodarsko dejavnost zelo razlikujejo, kar prikazuje spodnji graf.
+```{r graf1, echo=FALSE, message=FALSE, warning=FALSE}
+print(graf1)
+```
+
 Zanimivo je, da so najnižje plače ne glede na to ali gledamo po vrsti sektorja ali po gospodarski dejavnosti vedno dosežene pri ženskah, za razliko od najvišjih plač, ki so pri različnih gospodarskih dejavnostih nekatere dosežene tudi ženskah ne samo pri moških, vendar še vseeno močno prevladujejo moški.
+
+V nadaljevanju pa me je zanimala plača v času svetovne krize leta 2008. Leta 2008 se je povprečna mesečna bruto plača povečala le za 9,9%, kar pa je še vseeno 2,6% več kakor leta 2007, kar bi lahko pomenilo, da so se podjetja že v času napovedi krize pripravljali nanjo. Leta 2008 je bila povprešno bruto mesečna plača nekoliko bolj nihajoča kot leto poprej ali leto kasneje. 
+
+Prav tako je povprečna mesečna bruto plača leta 2020 bolj nihajoča kot leta poprej. Razvidno iz spodnjega grafa je tudi to, da se je plača zmanjšala ravno v času, ko je bilo gospodarstvo najbolj omejeno(npr. mesec marec).
+
+```{r graf5, echo=FALSE, message=FALSE, warning=FALSE}
+print(graf5)
+```
 
 ***
 
 # Napredna analiza podatkov
+```#{r analiza, echo=FALSE, message=FALSE, warning=FALSE,  results='hide'}
+source("analiza/analiza.r", encoding="UTF-8")
+```
 
-***
+#Za potrebe napredne analize sem naredila napoved povišanja minimalne bruto plače v Sloveniji do leta 2024.
+
+```#{r graf_odstopanje, echo=FALSE, message=FALSE, warning=FALSE}
+print(graf_odstopanje)
+```
+
+#Analizirala sem tudi višino plače v posameznih dejavnostih glede na spol. Podatke sem prikazala grafično, glede na leto, ki ga izberemo v Shiny-u. 
+
 
 ```{r shiny}
 shinyAppDir("shiny", options=list(width="100%", height=600))
 ```
+***
