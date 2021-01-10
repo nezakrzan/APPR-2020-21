@@ -1,4 +1,8 @@
 # 4. faza: Analiza podatkov
+
+require(ggplot2)
+require(dplyr)
+
 #Krizi(2008,2020)
 meseci <- c("12", "11","10","09","08","07","06","05","04","03","02","01",
             "12", "11","10","09","08","07","06","05","04","03","02","01",
@@ -49,3 +53,4 @@ ggplot(kriza_leto2008, mapping=aes(x=meseci, y=kriza2008.placa)) +
   labs(title="Primerjava plače v letih 2008,2020") +
   ylab("Višina plače(€)") +
   xlab("Meseci")
+
