@@ -1,17 +1,13 @@
 library(shiny)
 
-shinyUI(fluidPage(
+fluidPage(
+  titlePanel(""),
   
-  titlePanel("Slovenske občine"),
+  tabPanel("Graf",
+           sidebarPanel(
+             selectInput("Leto", label = "Izberi leto", 
+                         choices = unique(gospodarskadejavnost$leto))),
+           mainPanel(plotOutput("graf_dejavnosti"),
+                     tableOutput("legenda")))
   
-  tabsetPanel(
-      tabPanel("Velikost družine",
-               DT::dataTableOutput("druzine")),
-      
-      tabPanel("Število naselij",
-               sidebarPanel(
-                  uiOutput("pokrajine")
-                ),
-               mainPanel(plotOutput("naselja")))
-    )
-))
+)

@@ -1,24 +1,16 @@
 library(shiny)
 
-shinyServer(function(input, output) {
-  output$druzine <- DT::renderDataTable({
-    druzine %>% pivot_wider(names_from="velikost.druzine", values_from="stevilo.druzin") %>%
-      rename(`Občina`=obcina)
-  })
+function(input, output) {
   
-  output$pokrajine <- renderUI(
-    selectInput("pokrajina", label="Izberi pokrajino",
-                choices=c("Vse", levels(obcine$pokrajina)))
-  )
-  output$naselja <- renderPlot({
-    main <- "Pogostost števila naselij"
-    if (!is.null(input$pokrajina) && input$pokrajina %in% levels(obcine$pokrajina)) {
-      t <- obcine %>% filter(pokrajina == input$pokrajina)
-      main <- paste(main, "v regiji", input$pokrajina)
-    } else {
-      t <- obcine
-    }
-    ggplot(t, aes(x=naselja)) + geom_histogram() +
-      ggtitle(main) + xlab("Število naselij") + ylab("Število občin")
+  output$graf_dejavnosti <- renderPlot({
+    graf_dejavnosti <- ggplot(gospodarskadejavnost %>% 
+                                filter(leto == input$leto)) + 
+      aes(x=oznaka, y=placa, fill=spol) +
+      geom_col(position = "dodge") + guides(fill=guide_legend("Leto")) +
+      labs(title = "Plače po dejavnosti in spolu") + theme(plot.title = element_text(hjust = 0.5)) +
+      ylab("Plača") + xlab("Dejavnosti") + coord_flip()
+    print(graf_dejavnosti)
   })
-})
+  output$legenda <- renderTable(gospodarskadejavnost %>%
+                                  select(oznaka, dejavnost) %>% unique())
+}
