@@ -7,9 +7,11 @@ sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
 #Povprečna bruto mesečna plača glede na gospodarsko dejavnost, izobrazbo in spol
 gospodarskadejavnost <- read_csv2("podatki/placa_dejavnost.csv",
-                                  col_names=c("gospodarska.dejavnost","izobrazba","spol","leto","placa"),
+                                  col_names=c("dejavnost","izobrazba","spol","leto","placa"),
                                   skip=3, na="-",
                                   locale=locale(encoding="Windows-1250"))
+gospodarskadejavnost <- head(gospodarskadejavnost, -54)
+gospodarskadejavnost <- separate(gospodarskadejavnost, col=1, into=c("oznaka", "dejavnost"), sep="(?<=^.)\\s")
 
 gospodarskadejavnost2 <- read_csv2("podatki/spolskupaj.csv",
                                   col_names=c("gospodarska.dejavnost","izobrazba","leto","spol","placa"),
@@ -54,6 +56,23 @@ kriza2008 <- read_csv2("podatki/kriza2008.csv",
 kriza2020 <- read_xlsx("podatki/kriza2020.xlsx",
                        col_names=c("leto","tip place", "placa"),
                        skip=2, n_max=21) %>% select(-"tip place")
+
+kriza_1 <- read_xlsx("podatki/kriza.xlsx",
+                       col_names=c("leto","tip place", "placa"),
+                       skip=2, n_max=58) %>% select(-"tip place")
+
+mesec <- c("10", "09","08","07","06","05","04","03","02","01",
+           "12", "11","10","09","08","07","06","05","04","03","02","01",
+           "12", "11","10","09","08","07","06","05","04","03","02","01",
+           "12", "11","10","09","08","07","06","05","04","03","02","01",
+           "12", "11","10","09","08","07","06","05","04","03","02","01")
+leto <- c("2020","2020","2020","2020","2020","2020","2020","2020","2020","2020",
+          "2019","2019","2019","2019","2019","2019","2019","2019","2019","2019","2019","2019",
+          "2009","2009","2009","2009","2009","2009","2009","2009","2009","2009","2009","2009",
+          "2008","2008","2008","2008","2008","2008","2008","2008","2008","2008","2008","2008",
+          "2007","2007","2007","2007","2007","2007","2007","2007","2007","2007","2007","2007")
+kriza <- data.frame(leto, mesec, kriza_1$placa)
+
 
 #Minimalne plače po državah
 min_place <- read_html("podatki/minimalne_place.htm") %>% html_node(xpath="//table[@class='infoData']") %>%
