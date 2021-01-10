@@ -56,8 +56,8 @@ kriza2020 <- read_xlsx("podatki/kriza2020.xlsx",
                        skip=2, n_max=21) %>% select(-"tip place")
 
 #Minimalne plače po državah
-min_place <- read_html("podatki/minimalne_place.htm") %>% html_node(xpath="//table[@class='infoData']") %>% 
-  html_table() %>% melt(id.vars="timegeo", variable.name="leto", value.name="placa") %>%
-  mutate(placa=parse_number(placa, na=c(":", ":(z)"), locale=locale(decimal_mark=".", grouping_mark=","))) %>% drop_na(3) 
+min_place <- read_html("podatki/minimalne_place.htm") %>% html_node(xpath="//table[@class='infoData']") %>%
+  html_table() %>% pivot_longer(-timegeo, names_to="Leto", values_to="Placa", names_transform=c(Leto=parse_number)) %>%
+  mutate(Placa=parse_number(Placa, na=c(":", ":(z)"), locale=locale(decimal_mark=".", grouping_mark=","))) %>%
+  rename(Drzava=timegeo) %>% drop_na(Placa)
 
-names(min_place)[1:3] <- c("Drzava", "Leto", "Placa")
