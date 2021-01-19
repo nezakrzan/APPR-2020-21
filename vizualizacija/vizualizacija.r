@@ -3,6 +3,7 @@
 require(ggplot2)
 require(dplyr)
 library(stringr)
+library(tmap) 
 
 #PLAČA GLEDE NA REGIJO IN SPOL
 visina.place <- povp_starost %>% filter(leto=="2018") %>% select(-leto)
@@ -15,7 +16,7 @@ zemljevid.place <- zemljevid_slovenije %>% left_join(visina.place, by=c("NAME_1"
 map <- ggplot(zemljevid.place, aes(x=long, y=lat, fill=placa, label=paste0(NAME_1, "\n", placa))) +
   geom_polygon(aes(group=group)) +
   geom_text(data=zemljevid.place %>% group_by(NAME_1, placa)  %>% 
-              summarise(long=mean(long), lat=mean(lat)), size=3, colour='red') +
+              summarise(long=mean(long), lat=mean(lat)), size=3, colour="black") +
   theme(axis.line=element_blank(),
         axis.text.x=element_blank(),
         axis.text.y=element_blank(),
@@ -27,7 +28,7 @@ map <- ggplot(zemljevid.place, aes(x=long, y=lat, fill=placa, label=paste0(NAME_
         panel.grid.major=element_blank(),
         panel.grid.minor=element_blank(),
         plot.background=element_blank()) +
-  labs(title ="Višina povp. bruto plače po regijah Slovenije") 
+  labs(fill="Plača(€)", title ="Višina povp. bruto plače po regijah Slovenije") 
 
 
 #ANALIZA PLAČE GLEDE NA JAVNI IN ZASEBNI SEKTOR
@@ -166,8 +167,8 @@ graf1 <- ggplot(gd_sprememba ,aes(x=str_wrap(gospodarska.dejavnost,45), y=spreme
   coord_flip() +
   guides(fill=guide_legend("Spol")) +
   xlab("Gospodarska dejavnost") + 
-  ylab("Sprememba")+
-  ggtitle("Sprememba plače glede na gospodarsko dejavnost")
+  ylab("Sprememba(%)")+
+  ggtitle("Sprememba plače(gospodarska dejavnost)")
 
 #Najvišja in najnižja plača v vsaki panogi glede na izobrazbo in spol
 maksimum <- data.frame(gospodarskadejavnost %>% 
@@ -186,7 +187,7 @@ kriza_2020 <- kriza %>%
   filter(leto=="2020")
 kriza_08_20 <- rbind(kriza_2008, kriza_2020)
 
-graf5 <- ggplot(kriza_08_20 ,aes(x=kriza_1.placa, y=mesec, fill=factor(leto))) + 
+graf5 <- ggplot(kriza_08_20 ,aes(x=placa, y=mesec, fill=factor(leto))) + 
   geom_col(position="dodge")  + 
   coord_flip() +
   guides(fill=guide_legend("Leto")) +
@@ -197,17 +198,5 @@ graf5 <- ggplot(kriza_08_20 ,aes(x=kriza_1.placa, y=mesec, fill=factor(leto))) +
 #Sprememba plače iz leta 2008 do leta 2020: 33,3%
 #Sprememba plače v letu 2008: 9,9%
 #Sprememba plače v letu 2020: 0,8%
-
-kriza_2007 <- kriza %>% 
-  filter(leto=="2007")
-kriza_08_07 <- rbind(kriza_2007, kriza_2008)
-
-ggplot(kriza_08_07 ,aes(x=kriza.placa, y=mesec, fill=factor(leto))) + 
-  geom_col(position="dodge")  + 
-  coord_flip() +
-  guides(fill=guide_legend("Leto")) +
-  xlab("Višina plače(€)") + 
-  ylab("Mesec")+
-  ggtitle("Primerjava plače v letu 2008 z letom 2007")
-
 #Sprememba plače v letu 2007: 7,4%
+
