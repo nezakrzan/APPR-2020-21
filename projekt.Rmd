@@ -124,7 +124,7 @@ print(graf5)
 source("analiza/analiza.r", encoding="UTF-8")
 ```
 
-Za potrebe napredne analize sem naredila napoved povišanja minimalne bruto plače v Sloveniji do leta 2024.
+Za potrebe napredne analize sem naredila napoved povišanja minimalne bruto plače v Sloveniji do leta 2024. 
 
 ```{r graf_odstopanje, echo=FALSE, message=FALSE, warning=FALSE}
 print(graf_odstopanje)
