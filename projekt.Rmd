@@ -87,6 +87,7 @@ Zanimala me je tudi primerjava plače glede na zasebni in javni sektor, kar prik
 ```{r graf2, echo=FALSE, message=FALSE, warning=FALSE}
 print(graf2)
 ```
+
 Plača je bil v vmesnih letih(2012-2015) skoraj enaka in se je razlika manjšala, v zadnij 3 letih pa se razlika med plačo v javnem sektorju in zasebnem ponovno nekoliko povečuje, kar bi lahko z ekonomskega vidika pomenilo, da se zasebna podjetja pripravljajo na prihajajpčo krizo oz. krizo Covid-19.
 
 ```{r graf3, graf4, echo=FALSE, message=FALSE, warning=FALSE}
@@ -134,4 +135,12 @@ Analizirala sem tudi višino plače v posameznih dejavnostih glede na spol. Poda
 ```{r shiny}
 shinyAppDir("shiny", options=list(width="100%", height=600))
 ```
+
+***
+
+# Zaključek
+Prišla sem do ugotovitev, da imajo ženske nižjo plačo od moških in zasebno sektor v povprečju nižjo plačo od javnega sektorja, kar me sicer ni ravno presenetilo. Presenetile me je bolj razlika v višini bruto mesečne plače med srednješolsko izobrazbo in višješolsko/visokošolsko. 
+Zanimivo je, kako se razlikuje sprememba plače v 10 letih glede na gospodarsko dejavnost, razvidno je katere dejavnosti so nekoliko napredovale pri svoji pomembnosti, nekatere pa ohranjale svojo vlogo v državi.
+Razvidno in tudi predvsem logično je, da je plača z leti naraščala, v zadnjih letih analize pa se tudi pozna že prihajajoča kriza in trenutno stanje v državi glede Covid-19. 
+
 ***
