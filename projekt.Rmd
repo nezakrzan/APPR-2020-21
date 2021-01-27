@@ -90,7 +90,7 @@ print(graf2)
 
 Plača je bil v vmesnih letih(2012-2015) skoraj enaka in se je razlika manjšala, v zadnij 3 letih pa se razlika med plačo v javnem sektorju in zasebnem ponovno nekoliko povečuje, kar bi lahko z ekonomskega vidika pomenilo, da se zasebna podjetja pripravljajo na prihajajpčo krizo oz. krizo Covid-19.
 
-```{r graf3, graf4, echo=FALSE, message=FALSE, warning=FALSE}
+```{r graf34, echo=FALSE, message=FALSE, warning=FALSE}
 print(graf3)
 print(graf4)
 ```
