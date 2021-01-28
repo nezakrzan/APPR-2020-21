@@ -133,7 +133,7 @@ print(graf_odstopanje)
 Analizirala sem tudi višino plače v posameznih dejavnostih glede na spol. Podatke sem prikazala grafično, glede na leto.
 
 ```{r shiny}
-shinyAppDir("shiny", options=list(width="100%", height=600))
+shinyAppDir("shiny", options=list(width="100%", height=1070))
 ```
 
 ***
